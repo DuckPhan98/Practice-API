@@ -1,0 +1,79 @@
+Objective: Automate Android Phone Features Using Python and Pytest
+
+Requirements:
+
+- Utilize Appium to interact with Android devices for feature validation.
+
+- Structure your test automation using the Page Object Model (POM) to improve scalability and maintainability.
+- Create the .env enviroment for my project and also requirments.txt file
+
+
+android_automation/
+├── config/
+│   └── devices.yaml                 # Device configuration file (SUT equivalent)
+│
+├── conftest.py                      # Global pytest fixtures (e.g., ADB setup, device config loader)
+│
+├── tests/
+│   └── test_login_feature.py       # Test cases using POM classes and fixtures
+│
+├── pages/
+│   ├── base_page.py                # Base page with common Appium actions
+│   ├── login_page.py               # Page class for login screen interactions
+│   └── home_page.py                # Page class for home screen validation
+│
+├── utils/
+│   ├── adb_utils.py                # ADB helper functions (check/install packages, connectivity)
+│   ├── device_loader.py           # Load and parse device config (devices.yaml)
+│   └── logger.py                   # Custom logger setup (optional)
+│
+├── drivers/
+│   └── driver_factory.py           # Appium driver initialization based on device info
+│
+├── requirements.txt                # Required Python packages
+└── README.md                       # Project documentation
+
+- Ensure that all necessary libraries and dependencies are installed on both the host machine and the Android devices.
+
+Environment Setup Automation:
+
+ Implement a Pytest fixture that:
+
+  - Verifies the presence of required packages (e.g., uiautomator, Appium, etc.) on the connected Android device.
+
+  - Automatically installs any missing packages via ADB (Android Debug Bridge) commands before executing test cases.
+
+Device Configuration Management:
+
+- Similar to the SUT (System Under Test) configuration file used in Maven-based Java projects, define a structured configuration file (e.g., YAML, JSON, or INI) for the Python-Pytest framework.
+
+- This file should contain device-specific details required during test execution, such as IP address, extension, and password.
+
+
+Example Configuration Format:
+phones:
+  - name: Phone A
+    device_type: K175
+    ip_address: 10.1.1.2
+    extension: 3001234
+    password: 12345
+
+  - name: Phone B
+    device_type: K155
+    ip_address: 10.1.1.3
+    extension: 3001234
+    password: 12345
+
+Test Runtime Behavior:
+
+When tests are initiated:
+
+- The framework should parse the configuration file to retrieve device details.
+
+- Validate ADB connectivity with each device using its IP address.
+
+- Use the extension and password information for login verification.
+
+- Confirm that the connected phone is associated with the correct extension.
+
+- Use logging and pytest-html, pytest.ini to config the log file
